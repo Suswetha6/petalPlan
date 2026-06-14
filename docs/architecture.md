@@ -261,22 +261,33 @@ backend:   uvicorn app.main:app --reload   (port 8000)
 frontend:  vite dev                        (port 5173, proxies /goals, /tasks, /insights → 8000)
 ```
 
-### Production (Single Container)
+### Production — Live Deployment
 
-FastAPI serves the built React app from `frontend/dist`:
+**URL:** [https://petalplan-deploy.onrender.com](https://petalplan-deploy.onrender.com)
 
-```
-docker-compose up
-  → nginx or uvicorn on port 80/443
-  → /assets/*    served as static files from frontend/dist/assets
-  → /            serves frontend/dist/index.html
-  → /goals, /tasks, /insights  handled by FastAPI routes
-```
-
-### Production (Split Deployment)
+Single Render Web Service — FastAPI serves both the API and the built React app from the same origin. No CORS configuration required.
 
 ```
-Frontend:  Vercel / Netlify / S3+CloudFront  (static)
-Backend:   Render / Railway / Fly.io         (uvicorn, with CORS configured)
-Database:  Supabase / Neon / RDS             (PostgreSQL, DATABASE_URL env var)
+Browser
+  └── https://petalplan-deploy.onrender.com
+        ├── GET /               → frontend/dist/index.html  (served by FastAPI StaticFiles)
+        ├── GET /assets/*       → frontend/dist/assets/*
+        └── /goals, /tasks, /insights → FastAPI route handlers → Supabase
 ```
+
+**Render build config:**
+
+| Field | Value |
+|-------|-------|
+| Runtime | Python 3.11 (`runtime.txt`) |
+| Build command | `cd frontend && npm install && npm run build && cd .. && pip install -r backend/requirements.txt` |
+| Start command | `cd backend && uvicorn app.main:app --host 0.0.0.0 --port $PORT` |
+
+**Environment variables set on Render:**
+
+| Variable | Purpose |
+|----------|---------|
+| `ANTHROPIC_API_KEY` | Claude API access |
+| `DATABASE_URL` | Supabase PostgreSQL session pooler (`aws-1-ap-northeast-2`) |
+
+**Why single service over split deployment:** A split frontend (CDN) + backend setup requires CORS headers and a `VITE_API_URL` env var baked into the Vite build. Serving both from one FastAPI process eliminates both concerns — the browser sees one origin, relative URLs work as-is, and TLS is terminated by Render's Cloudflare layer automatically.

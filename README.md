@@ -1,5 +1,7 @@
 # PetalPlan
 
+**Live:** [petalplan-deploy.onrender.com](https://petalplan-deploy.onrender.com)
+
 An AI-native adaptive planner built for the **CCCL × Nova Buildathon — June 14, 2026**.
 
 PetalPlan generates weekly task plans from a goal, tracks what you complete or skip, and learns from your behavior to schedule smarter next time.
@@ -54,6 +56,30 @@ npm run dev
 ```
 
 App runs at `http://localhost:5173`.
+
+---
+
+## Deployment
+
+Hosted as a single Render Web Service — FastAPI serves both the API and the React build from the same URL, eliminating CORS entirely.
+
+| Component | Platform | URL |
+|-----------|----------|-----|
+| App (frontend + backend) | Render Web Service | [petalplan-deploy.onrender.com](https://petalplan-deploy.onrender.com) |
+| Database | Supabase (PostgreSQL, free tier) | `aws-1-ap-northeast-2` |
+
+**Render build config:**
+```
+Build   : cd frontend && npm install && npm run build && cd .. && pip install -r backend/requirements.txt
+Start   : cd backend && uvicorn app.main:app --host 0.0.0.0 --port $PORT
+Runtime : Python 3.11
+```
+
+**Required env vars on Render:**
+```
+ANTHROPIC_API_KEY
+DATABASE_URL
+```
 
 ---
 
