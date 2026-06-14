@@ -2,6 +2,8 @@ import { useState, useCallback, useEffect } from 'react'
 import axios from 'axios'
 import './App.css'
 
+axios.defaults.baseURL = import.meta.env.VITE_API_URL || ''
+
 const DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
 
 const MOOD_CONFIG = {

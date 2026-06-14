@@ -2,6 +2,7 @@ from dotenv import load_dotenv
 load_dotenv()  # must run before any module reads DATABASE_URL or ANTHROPIC_API_KEY
 
 from fastapi import FastAPI, HTTPException, Depends, Body, Query
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 from typing import Optional
@@ -90,6 +91,14 @@ def _save_plan_tasks(db: Session, goal_id: int, tasks: list[dict], week_start: d
 # ── App ───────────────────────────────────────────────────────────────────────
 
 app = FastAPI(title="PetalPlan API")
+
+ALLOWED_ORIGINS = os.getenv("ALLOWED_ORIGINS", "*").split(",")
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=ALLOWED_ORIGINS,
+    allow_methods=["GET", "POST", "PATCH"],
+    allow_headers=["Content-Type"],
+)
 
 FRONTEND_DIST = os.path.abspath(
     os.path.join(os.path.dirname(__file__), "..", "..", "frontend", "dist")
