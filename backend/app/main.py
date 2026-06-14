@@ -92,10 +92,9 @@ def _save_plan_tasks(db: Session, goal_id: int, tasks: list[dict], week_start: d
 
 app = FastAPI(title="PetalPlan API")
 
-ALLOWED_ORIGINS = os.getenv("ALLOWED_ORIGINS", "*").split(",")
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=ALLOWED_ORIGINS,
+    allow_origins=["*"],
     allow_methods=["GET", "POST", "PATCH"],
     allow_headers=["Content-Type"],
 )
