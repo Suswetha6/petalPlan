@@ -1,0 +1,92 @@
+:root {
+  --accent: #7C3AED;
+  --accent-light: #8B5CF6;
+  --accent-bg: #EDE9FE;
+  --accent-border: #C4B5FD;
+  --hero-start: #3B0764;
+  --hero-mid: #5B21B6;
+  --hero-end: #7C3AED;
+
+  --text: #6B7280;
+  --text-h: #1A0533;
+  --bg: #FFFFFF;
+  --page-bg: transparent;
+  --border: #E5E7EB;
+  --card-border: #EDE9FE;
+  --code-bg: #F3F4F6;
+
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 16px rgba(124,58,237,0.12), 0 2px 6px rgba(0,0,0,0.06);
+  --shadow-lg: 0 10px 40px rgba(124,58,237,0.18), 0 4px 12px rgba(0,0,0,0.08);
+
+  --sans: 'Inter', system-ui, 'Segoe UI', Roboto, sans-serif;
+  --heading: 'Nunito', system-ui, 'Segoe UI', Roboto, sans-serif;
+  --mono: ui-monospace, Consolas, monospace;
+
+  font: 16px/150% var(--sans);
+  letter-spacing: 0.1px;
+  color-scheme: light;
+  color: var(--text);
+  background: var(--page-bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  background-color: #EAE2D4;
+  background-image: radial-gradient(circle, rgba(155,140,118,0.55) 1.2px, transparent 1.2px);
+  background-size: 22px 22px;
+}
+
+#root {
+  width: 100%;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+h1, h2, h3 {
+  font-family: var(--heading);
+  color: var(--text-h);
+  margin: 0;
+}
+
+h1 {
+  font-size: 56px;
+  font-weight: 900;
+  letter-spacing: -2px;
+  line-height: 1.1;
+
+  @media (max-width: 768px) {
+    font-size: 36px;
+    letter-spacing: -1px;
+  }
+}
+
+h2 {
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+
+  @media (max-width: 768px) {
+    font-size: 22px;
+  }
+}
+
+p {
+  margin: 0;
+}
+
+code {
+  font-family: var(--mono);
+  font-size: 13px;
+  padding: 2px 6px;
+  background: var(--code-bg);
+  border-radius: 4px;
+  color: var(--text-h);
+}

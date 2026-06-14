@@ -1,0 +1,25 @@
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.pyo
+
+# SQLite
+*.db
+
+# Node
+node_modules/
+frontend/node_modules/
+frontend/dist/
+package-lock.json
+
+# Logs
+*.log
+
+# IDEs
+.vscode/
+
+# Env files
+.env
+.env.*

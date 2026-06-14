@@ -1,0 +1,3 @@
+- Go through README.md for project overview and setup instructions
+- Go through docs/architecture.md for system design and security decisions
+- Go through docs/api.md for all endpoint details

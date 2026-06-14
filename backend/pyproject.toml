@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "petalplan-backend"
+version = "0.1.0"
+description = "Backend for PetalPlan - FastAPI"
+authors = ["Dev <dev@example.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = "^0.100.0"
+uvicorn = {extras = ["standard"], version = "^0.22.0"}
+sqlalchemy = "^2.0.0"
+alembic = "^2.0.0"
+databases = "^0.6.0"
+pydantic = "^1.10.0"
+python-dotenv = "^1.0.0"
+
+[tool.poetry.dev-dependencies]
+pytest = "^7.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
